@@ -1,6 +1,6 @@
 import { StockClientPage } from './app.po';
 
-desctock-client-upgrade App', function() {
+desctock-client App', function() {
   let page: StockClientPage;
 
   beforeEach(() => {
