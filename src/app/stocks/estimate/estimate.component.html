@@ -1,0 +1,72 @@
+<div class="row">
+    <div class="col-lg-4 col-xs-6">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-industry"></i></span>      
+            <input type="text" class="form-control" placeholder="Symbol" [(ngModel)]="stockModel.symbol">
+        </div>
+    </div>
+    <div class="col-lg-4 col-xs-6">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-usd"></i></span>
+            <input type="number" class="form-control" placeholder="Price" [(ngModel)]="stockModel.price">
+        </div>
+    </div>
+    <div class="col-lg-4 col-xs-12">
+        <button type="button" class="btn btn-primary" (click)="estimate();">Estimate</button>
+    </div>
+</div>
+<br/>
+<div class="row">
+    <div class="col-lg-6 col-xs-12" *ngIf="stock.symbol">
+        <div class="panel" [class.panel-success]="stock.totalNetValue >= 0" [class.panel-danger]="stock.totalNetValue < 0">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-lg-5 col-xs-5">
+                        <b>{{stock.symbol}} @ {{stock.price | currency:'USD':true:'1.1-2'}}</b>
+                    </div>
+                    <div class="col-lg-4 col-xs-4">
+                        {{stock.totalNetValue | currency:'USD':true:'1.1-2'}}
+                    </div>
+                    <div class="col-lg-3 col-xs-3 text-right">
+                         {{stock.quantity | number:'1.1-3'}}
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="row" *ngFor="let transaction of stock.transactions">
+                    <div *ngIf="transaction.hasSold === false">
+                        <div class="col-lg-4 col-xs-4 text-right">{{transaction.netValue | currency:'USD':true}}</div>
+                        <div class="col-lg-4 col-xs-4 text-right">{{transaction.quantityPaid}}</div>
+                        <div class="col-lg-4 col-xs-4 text-right">{{transaction.paidPerShare | currency:'USD':true}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-xs-12" *ngIf="estimatedStock.symbol">
+        <div class="panel" [class.panel-success]="estimatedStock.totalNetValue >= 0" [class.panel-danger]="estimatedStock.totalNetValue < 0">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-lg-5 col-xs-5">
+                        <b>{{estimatedStock.symbol}}</b> @ {{estimatedStock.price | currency:'USD':true:'1.1-2'}}
+                    </div>
+                    <div class="col-lg-4 col-xs-4">
+                        {{estimatedStock.totalNetValue | currency:'USD':true:'1.1-2'}}
+                    </div>
+                    <div class="col-lg-3 col-xs-3 text-right">
+                         {{estimatedStock.quantity | number:'1.1-3'}}
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="row" *ngFor="let transaction of estimatedStock.transactions">
+                    <div *ngIf="transaction.hasSold === false">
+                        <div class="col-lg-4 col-xs-4 text-right">{{transaction.netValue | currency:'USD':true}}</div>
+                        <div class="col-lg-4 col-xs-4 text-right">{{transaction.quantityPaid}}</div>
+                        <div class="col-lg-4 col-xs-4 text-right">{{transaction.paidPerShare | currency:'USD':true}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>

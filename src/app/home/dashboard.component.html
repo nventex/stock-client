@@ -1,0 +1,75 @@
+﻿<div id="page-wrapper">
+    <h5 class="page-header">Dashboard</h5>
+    <tabset>
+        <tab heading="Stocks"
+             [active]="tabSet.isStocks"
+             (select)="setFocusOnStockSearch()"
+             (deselect)="tabSet.isStocks = false">
+            <div class="row">
+                <div class="col-lg-12">
+                    <br/>
+                    <nv-stock-list 
+                        (onEstimateStockClicked)="onEstimateStockClicked($event);"
+                        ></nv-stock-list>
+                </div>
+            </div>
+        </tab>
+        <tab heading="Buy"
+             [active]="tabSet.isBuyStock"
+             (deselect)="tabSet.isBuyStock = false">
+            <br/>
+            <div class="row">
+                <div class="col-lg-4 col-xs-4">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-industry"></i></span>      
+                        <input type="text" class="form-control" placeholder="Symbol" [(ngModel)]="stockModel.symbol">
+                    </div>
+                </div>
+                <div class="col-lg-4 col-xs-4">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-tags"></i></span>
+                        <input type="number" class="form-control" placeholder="Shares" [(ngModel)]="stockModel.quantityPaid">
+                    </div>
+                </div>
+                <div class="col-lg-4 col-xs-4">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-usd"></i></span>
+                        <input type="number" class="form-control" placeholder="Paid" [(ngModel)]="stockModel.paid">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <br/>
+                    <button type="button" class="btn btn-primary" (click)="buyStock();">Buy</button>
+                </div>
+            </div>
+        </tab>
+        <tab heading="Estimate"
+             [active]="tabSet.isEstimate"
+             (deselect)="tabSet.isEstimate = false">
+            <div class="row">
+                <div class="col-lg-12">
+                    <br/>
+                    <nv-estimate [symbol]="estimateSymbol"></nv-estimate>
+                </div>
+            </div>
+        </tab>
+        <tab heading="Delete"
+             [active]="tabSet.isDeleteStock"
+             (deselect)="tabSet.isDeleteStock = false">
+            <br/>
+            <div class="row">
+                <div class="col-lg-6 col-xs-6">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-industry"></i></span>      
+                        <input type="text" class="form-control" placeholder="Symbol" [(ngModel)]="stockModel.symbol">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-xs-6">
+                    <button type="button" class="btn btn-primary" (click)="deleteStock();">Delete</button>
+                </div>
+            </div>
+        </tab>         
+    </tabset>            
+</div>
