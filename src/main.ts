@@ -1,4 +1,4 @@
-import "./polyfills.ts";
+import "./polyfills";
 
 import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
 import { enableProdMode } from "@angular/core";
@@ -9,12 +9,4 @@ if (environment.production) {
   enableProdMode();
 }
 
-// my original code
-window.setTimeout(() => {
-  platformBrowserDynamic().bootstrapModule(AppModule);
-}, 0);
-
-// added workaround
-if (false) {
-  platformBrowserDynamic().bootstrapModule(AppModule);
-}
+platformBrowserDynamic().bootstrapModule(AppModule);
