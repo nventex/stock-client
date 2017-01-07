@@ -9,5 +9,12 @@ if (environment.production) {
   enableProdMode();
 }
 
-var promise = platformBrowserDynamic().bootstrapModule(AppModule);
-promise.then(() => console.log('test'));
+// my original code
+window.setTimeout(() => {
+  platformBrowserDynamic().bootstrapModule(AppModule);
+}, 0);
+
+// added workaround
+if (false) {
+  platformBrowserDynamic().bootstrapModule(AppModule);
+}
